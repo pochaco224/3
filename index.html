@@ -1,0 +1,900 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHOI YENA | PRIVATE ARCHIVE</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;600&display=swap');
+
+:root{
+ --bg:#08090b;
+ --panel:#111216;
+ --panel2:#17151a;
+ --red:#a82c40;
+ --bright:#e04d60;
+ --blue:#617cba;
+ --white:#dedce0;
+ --gray:#85838c;
+ --line:#302b32;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+ background:var(--bg);
+ color:var(--white);
+ font-family:'Noto Sans KR',sans-serif;
+ min-height:100vh;
+ overflow-x:hidden;
+}
+
+body:before{
+ content:"";
+ position:fixed;
+ inset:0;
+ z-index:10;
+ pointer-events:none;
+ opacity:.12;
+ background:repeating-linear-gradient(
+  0deg,transparent 0px,transparent 3px,
+  rgba(255,255,255,.07) 4px
+ );
+}
+
+body:after{
+ content:"";
+ position:fixed;
+ inset:0;
+ z-index:9;
+ pointer-events:none;
+ background:radial-gradient(ellipse at center,transparent 35%,#000 110%);
+}
+
+.noise{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:8;
+ opacity:.035;
+ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+header{
+ height:65px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:0 7%;
+ border-bottom:1px solid var(--line);
+ background:#09090bed;
+ position:relative;
+ z-index:11;
+}
+
+.logo{
+ font-family:'IBM Plex Mono',monospace;
+ letter-spacing:3px;
+ font-size:11px;
+}
+
+.live{
+ display:flex;
+ align-items:center;
+ gap:9px;
+ color:var(--bright);
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+ letter-spacing:2px;
+}
+
+.dot{
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ background:var(--bright);
+ box-shadow:0 0 12px var(--bright);
+ animation:blink 1.4s infinite;
+}
+
+@keyframes blink{
+ 50%{opacity:.2}
+}
+
+main{
+ max-width:1100px;
+ margin:auto;
+ padding:48px 30px 75px;
+ min-height:calc(100vh - 125px);
+ position:relative;
+ z-index:2;
+}
+
+.page{display:none;animation:fade .4s ease}
+.page.active{display:block}
+
+@keyframes fade{
+ from{opacity:0;transform:translateY(8px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+/* MAIN */
+
+.hero{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:38px;
+ align-items:center;
+}
+
+.character-frame{
+ position:relative;
+ height:490px;
+ background:#151116;
+ border:1px solid #38252e;
+ overflow:hidden;
+}
+
+.character-frame img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ object-position:center;
+ display:block;
+}
+
+.image-placeholder{
+ position:absolute;
+ inset:0;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ gap:12px;
+ background:
+ radial-gradient(ellipse at center,#38232d 0%,#151116 55%,#08090b 100%);
+ color:#a17e89;
+ text-align:center;
+}
+
+.image-placeholder .symbol{
+ font-size:45px;
+ color:#8d394d;
+}
+
+.image-placeholder small{
+ font-family:'IBM Plex Mono',monospace;
+ letter-spacing:2px;
+ font-size:10px;
+}
+
+.image-label{
+ position:absolute;
+ bottom:0;
+ left:0;
+ right:0;
+ padding:18px;
+ background:linear-gradient(transparent,#08090bed);
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+ color:#d4a6b0;
+ letter-spacing:2px;
+}
+
+.hero-info .eyebrow{
+ color:var(--bright);
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+ letter-spacing:3px;
+ margin-bottom:20px;
+}
+
+.hero-info h1{
+ font-size:clamp(48px,7vw,82px);
+ line-height:1;
+ letter-spacing:-4px;
+ font-weight:300;
+}
+
+.hero-info h1 span{color:var(--bright)}
+
+.eng-name{
+ font-family:'IBM Plex Mono',monospace;
+ font-size:11px;
+ letter-spacing:4px;
+ color:var(--gray);
+ margin-top:15px;
+}
+
+.description{
+ color:#96929a;
+ font-size:13px;
+ line-height:2.1;
+ margin-top:30px;
+}
+
+.quote{
+ margin-top:27px;
+ border-left:2px solid var(--red);
+ padding:14px 18px;
+ background:#1a1116;
+ color:#d6c7cc;
+ font-size:13px;
+ line-height:2;
+}
+
+.quick-info{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+ margin-top:25px;
+}
+
+.quick-info div{
+ padding:13px 10px;
+ background:var(--panel);
+ border:1px solid var(--line);
+}
+
+.quick-info small{
+ display:block;
+ color:var(--bright);
+ font-family:'IBM Plex Mono',monospace;
+ font-size:9px;
+ margin-bottom:8px;
+}
+
+.quick-info strong{
+ font-size:12px;
+ font-weight:400;
+}
+
+/* NAVIGATION */
+
+.navigation{
+ display:flex;
+ flex-wrap:wrap;
+ gap:9px;
+ border-top:1px solid var(--line);
+ margin-top:43px;
+ padding-top:23px;
+}
+
+.navigation button{
+ padding:12px 17px;
+ background:#111115;
+ color:#89858e;
+ border:1px solid #343039;
+ font-size:11px;
+ letter-spacing:1px;
+ transition:.25s;
+ cursor:pointer;
+}
+
+.navigation button:hover,
+.navigation button.active{
+ border-color:var(--red);
+ background:#26141a;
+ color:#f0c2cb;
+}
+
+.eyebrow{
+ color:var(--bright);
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+ letter-spacing:3px;
+ margin-bottom:14px;
+}
+
+.page-title{
+ font-size:36px;
+ font-weight:300;
+ letter-spacing:-1px;
+}
+
+.page-desc{
+ font-size:12px;
+ line-height:1.9;
+ color:var(--gray);
+ margin:10px 0 30px;
+}
+
+/* CONTENT */
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+
+.card{
+ background:var(--panel);
+ border:1px solid var(--line);
+ padding:22px;
+}
+
+.card small{
+ display:block;
+ font-family:'IBM Plex Mono',monospace;
+ color:var(--bright);
+ font-size:10px;
+ letter-spacing:2px;
+ margin-bottom:12px;
+}
+
+.card strong{
+ font-size:14px;
+ font-weight:400;
+}
+
+.card p{
+ font-size:12px;
+ color:#939099;
+ line-height:2;
+ margin-top:8px;
+}
+
+.full{grid-column:1/-1}
+
+.section-label{
+ color:#bc6979;
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+ letter-spacing:3px;
+ margin:32px 0 15px;
+}
+
+.alert{
+ padding:16px 18px;
+ background:#201117;
+ border:1px solid #702d40;
+ color:#d07d8d;
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+ line-height:2;
+ margin-bottom:20px;
+}
+
+.bar{
+ height:3px;
+ background:#302b32;
+ margin-top:14px;
+}
+.bar span{
+ display:block;
+ height:100%;
+ background:var(--red);
+}
+
+.record{
+ border-left:1px solid #6e3444;
+ margin-left:6px;
+ padding:4px 0 24px 21px;
+ position:relative;
+}
+.record:before{
+ content:"";
+ position:absolute;
+ left:-4px;
+ top:7px;
+ width:7px;
+ height:7px;
+ background:var(--bright);
+ border-radius:50%;
+ box-shadow:0 0 9px var(--red);
+}
+.record small{
+ color:var(--bright);
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+}
+.record h3{
+ font-size:14px;
+ font-weight:400;
+ margin:9px 0;
+}
+.record p{
+ color:#92909a;
+ font-size:12px;
+ line-height:1.9;
+}
+
+/* CCTV */
+
+.cctv{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+
+.monitor{
+ border:1px solid var(--line);
+ background:#0c0d11;
+ padding:13px;
+}
+
+.screen{
+ height:125px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:repeating-linear-gradient(
+  0deg,#11151b 0px,#11151b 2px,#181d25 3px
+ );
+ color:#8292b4;
+ font-family:'IBM Plex Mono',monospace;
+ font-size:11px;
+ position:relative;
+ overflow:hidden;
+ margin-bottom:13px;
+}
+
+.screen:after{
+ content:"";
+ position:absolute;
+ left:0;
+ right:0;
+ height:1px;
+ background:#9eb4dd;
+ opacity:.4;
+ animation:scan 3s linear infinite;
+}
+
+@keyframes scan{
+ from{top:0}
+ to{top:100%}
+}
+
+.monitor small{
+ color:var(--bright);
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+}
+
+.monitor p{
+ font-size:11px;
+ color:var(--gray);
+ margin-top:6px;
+}
+
+/* RELATION */
+
+.relation{
+ padding:25px;
+ background:linear-gradient(120deg,#1c1218,#101116);
+ border:1px solid #392630;
+ margin-bottom:13px;
+}
+
+.relation small{
+ font-family:'IBM Plex Mono',monospace;
+ color:var(--bright);
+ font-size:10px;
+ letter-spacing:2px;
+}
+
+.relation h3{
+ font-size:17px;
+ font-weight:400;
+ margin:14px 0;
+}
+
+.relation p{
+ font-size:12px;
+ color:#96919a;
+ line-height:2.1;
+}
+
+.relation em{color:#d57c8b}
+
+.back{
+ margin-top:35px;
+ padding:12px 18px;
+ background:#111115;
+ border:1px solid #37323a;
+ color:#aaa6ae;
+ font-size:11px;
+ cursor:pointer;
+}
+
+.back:hover{
+ border-color:var(--red);
+ color:white;
+}
+
+footer{
+ padding:22px 7%;
+ border-top:1px solid var(--line);
+ display:flex;
+ justify-content:space-between;
+ color:#5e5b63;
+ font-family:'IBM Plex Mono',monospace;
+ font-size:9px;
+ letter-spacing:2px;
+ position:relative;
+ z-index:11;
+}
+
+@media(max-width:700px){
+ header{padding:0 20px}
+ main{padding:30px 18px 55px}
+ .hero{grid-template-columns:1fr;gap:25px}
+ .character-frame{height:420px}
+ .hero-info h1{font-size:60px}
+ .grid,.cctv{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ .quick-info div{padding:11px 7px}
+ .quick-info strong{font-size:11px}
+ footer{padding:20px}
+}
+</style>
+</head>
+
+<body>
+<div class="noise"></div>
+
+<header>
+ <div class="logo">YENA / PRIVATE ARCHIVE</div>
+ <div class="live"><span class="dot"></span> SYSTEM ONLINE</div>
+</header>
+
+<main>
+
+<!-- MAIN PAGE -->
+<section class="page active" id="home">
+
+ <div class="hero">
+
+  <!-- CHARACTER IMAGE AREA -->
+  <div class="character-frame">
+
+   <!-- 여기에 캐릭터 이미지 주소를 넣으세요 -->
+   <img
+    src="https://raw.githubusercontent.com/pochaco224/2/refs/heads/main/IMG_1302.webp"
+    alt="최예나 캐릭터 이미지"
+    onerror="this.style.display='none'"
+   >
+
+   <div class="image-placeholder">
+    <div class="symbol">✦</div>
+    <small>CHARACTER IMAGE</small>
+    <small>INSERT YOUR IMAGE HERE</small>
+   </div>
+
+   <div class="image-label">
+    SUBJECT 01 / CHOI YENA
+   </div>
+
+  </div>
+
+  <!-- CHARACTER INTRODUCTION -->
+  <div class="hero-info">
+   <div class="eyebrow">CONFIDENTIAL CHARACTER FILE</div>
+
+   <h1>CHOI<br><span>YENA.</span></h1>
+
+   <div class="eng-name">최 예 나 / 25 YEARS OLD</div>
+
+   <div class="description">
+    다정한 미소와 상냥한 목소리.<br>
+    누구보다 평범해 보이는 여자.<br><br>
+    하지만 그녀에게 타인의 고통은
+    그저 흥미로운 관찰 대상일 뿐이다.
+   </div>
+
+   <div class="quote">
+    "어머, 왜 그렇게 봐?<br>
+    내가 무서워?"
+   </div>
+
+   <div class="quick-info">
+    <div>
+     <small>AGE</small>
+     <strong>25</strong>
+    </div>
+    <div>
+     <small>HEIGHT</small>
+     <strong>168 CM</strong>
+    </div>
+    <div>
+     <small>STATUS</small>
+     <strong>ACTIVE</strong>
+    </div>
+   </div>
+  </div>
+
+ </div>
+
+ <div class="navigation">
+  <button onclick="showPage('profile',this)">01 PROFILE</button>
+  <button onclick="showPage('mind',this)">02 PSYCHOLOGY</button>
+  <button onclick="showPage('crime',this)">03 CRIME FILE</button>
+  <button onclick="showPage('cctv',this)">04 CCTV</button>
+  <button onclick="showPage('relation',this)">05 YOU & YENA</button>
+ </div>
+
+</section>
+
+<!-- PROFILE -->
+<section class="page" id="profile">
+ <div class="eyebrow">01 / PERSONAL INFORMATION</div>
+ <h2 class="page-title">PROFILE</h2>
+ <p class="page-desc">최예나의 기본 신상 정보.</p>
+
+ <div class="grid">
+  <div class="card">
+   <small>NAME</small>
+   <strong>최예나 / CHOI YENA</strong>
+  </div>
+  <div class="card">
+   <small>AGE</small>
+   <strong>25 YEARS OLD</strong>
+  </div>
+  <div class="card">
+   <small>GENDER</small>
+   <strong>FEMALE</strong>
+  </div>
+  <div class="card">
+   <small>HEIGHT</small>
+   <strong>168 CM</strong>
+  </div>
+  <div class="card full">
+   <small>APPEARANCE</small>
+   <p>
+    허리 아래까지 내려오는 갈색 긴 생머리.
+    검은 눈동자 속 유독 선명한 푸른색 동공.
+    눈에 띄는 여성스러운 체형과 외모.
+   </p>
+  </div>
+  <div class="card full">
+   <small>FIRST IMPRESSION</small>
+   <p>
+    차분하고 여유롭다. 친절하고 상냥한 태도로
+    상대를 대하며, 때로는 누구보다 다정한 사람처럼 보인다.
+   </p>
+  </div>
+ </div>
+
+ <button class="back" onclick="showPage('home')">← BACK</button>
+</section>
+
+<!-- PSYCHOLOGY -->
+<section class="page" id="mind">
+ <div class="eyebrow">02 / PSYCHOLOGICAL ANALYSIS</div>
+ <h2 class="page-title">PSYCHOLOGY</h2>
+ <p class="page-desc">그녀의 내면과 행동 패턴.</p>
+
+ <div class="alert">
+  WARNING : MANIPULATIVE PERSONALITY DETECTED.<br>
+  NEVER CONFUSE HER KINDNESS WITH AFFECTION.
+ </div>
+
+ <div class="grid">
+  <div class="card">
+   <small>EMPATHY</small>
+   <strong>EXTREMELY LOW</strong>
+   <p>타인의 슬픔과 고통에 별다른 감정적 동요를 보이지 않는다.</p>
+   <div class="bar"><span style="width:8%"></span></div>
+  </div>
+  <div class="card">
+   <small>MANIPULATION</small>
+   <strong>EXCEPTIONAL</strong>
+   <p>상대의 심리와 약점을 파악하고 능숙하게 이용한다.</p>
+   <div class="bar"><span style="width:98%"></span></div>
+  </div>
+  <div class="card">
+   <small>SELF-CONTROL</small>
+   <strong>VERY HIGH</strong>
+   <p>위급한 순간에도 침착함을 잃지 않고 표정과 말투를 바꾼다.</p>
+   <div class="bar"><span style="width:96%"></span></div>
+  </div>
+  <div class="card">
+   <small>STIMULATION</small>
+   <strong>HIGH</strong>
+   <p>쉽게 지루함을 느끼며 새로운 자극과 흥미를 추구한다.</p>
+   <div class="bar"><span style="width:90%"></span></div>
+  </div>
+ </div>
+
+ <div class="section-label">BEHAVIORAL PATTERN</div>
+ <div class="card full">
+  <p>
+   · 타인의 감정을 자신의 목적에 맞게 이용한다.<br>
+   · 필요하다면 다정하고 상냥한 사람처럼 행동한다.<br>
+   · 상대방의 반응을 세밀하게 관찰한다.<br>
+   · 거짓말과 기만에 능숙하다.<br>
+   · 자신의 잘못을 인정하기보다 책임을 회피한다.<br>
+   · 규칙과 도덕보다 자신의 욕구를 우선한다.<br>
+   · 타인에게 쉽게 애착을 형성하지 않는다.
+  </p>
+ </div>
+
+ <button class="back" onclick="showPage('home')">← BACK</button>
+</section>
+
+<!-- CRIME -->
+<section class="page" id="crime">
+ <div class="eyebrow">03 / CONFIDENTIAL DOCUMENT</div>
+ <h2 class="page-title">CRIME FILE</h2>
+ <p class="page-desc">외부 유출 금지. 비공개 범죄 기록.</p>
+
+ <div class="grid">
+  <div class="card">
+   <small>CONFIRMED VICTIMS</small>
+   <strong style="font-size:35px;color:#df5267">13</strong>
+   <p>현재까지 확인된 피해자.</p>
+  </div>
+  <div class="card">
+   <small>HIDDEN LOCATION</small>
+   <strong>BASEMENT</strong>
+   <p>아파트 지하실.</p>
+  </div>
+  <div class="card full">
+   <small>CRIMINAL PROFILE</small>
+   <p>
+    치밀하게 계획된 살인. 범행 과정에서 희열을 느끼며
+    피해자의 고통에도 죄책감이나 후회를 보이지 않는다.
+    살해한 피해자들의 시체는 아파트 지하실에 보관한다.
+   </p>
+  </div>
+ </div>
+
+ <div class="section-label">RECOVERED RECORDS</div>
+
+ <div class="record">
+  <small>CASE 001 — 012</small>
+  <h3>UNIDENTIFIED INCIDENTS</h3>
+  <p>다수의 피해자. 세부 사건 기록 비공개.</p>
+ </div>
+
+ <div class="record">
+  <small>CASE 013 — LAST SURVIVOR</small>
+  <h3>THE EXCEPTION</h3>
+  <p>최예나가 살해하지 않고 생존시킨 인물. 현재 감금 상태.</p>
+ </div>
+
+ <div class="alert">
+  ACCESS RESTRICTED.<br>
+  THIS DOCUMENT IS CONFIDENTIAL.
+ </div>
+
+ <button class="back" onclick="showPage('home')">← BACK</button>
+</section>
+
+<!-- CCTV -->
+<section class="page" id="cctv">
+ <div class="eyebrow">04 / LIVE MONITORING</div>
+ <h2 class="page-title">SURVEILLANCE</h2>
+ <p class="page-desc">감금된 피실험자 SUBJECT 02의 감시 기록.</p>
+
+ <div class="alert">
+  <span class="dot" style="display:inline-block;margin-right:8px"></span>
+  LIVE FEED CONNECTED / SUBJECT 02
+ </div>
+
+ <div class="cctv">
+  <div class="monitor">
+   <div class="screen">CAM 01 / ENTRANCE</div>
+   <small>CAM 01 — ENTRANCE</small>
+   <p>출입구 감시</p>
+  </div>
+  <div class="monitor">
+   <div class="screen">CAM 02 / LIVING ROOM</div>
+   <small>CAM 02 — LIVING ROOM</small>
+   <p>거실 감시</p>
+  </div>
+  <div class="monitor">
+   <div class="screen">CAM 03 / SUBJECT ROOM</div>
+   <small>CAM 03 — SUBJECT ROOM</small>
+   <p>피실험자 전용 방</p>
+  </div>
+  <div class="monitor">
+   <div class="screen">CAM 04 / CORRIDOR</div>
+   <small>CAM 04 — CORRIDOR</small>
+   <p>복도 감시</p>
+  </div>
+ </div>
+
+ <div class="section-label">OBSERVATION NOTES</div>
+
+ <div class="card full">
+  <small>SUBJECT 02 / CURRENT STATUS</small>
+  <strong>ALIVE — UNDER CONTROL</strong>
+  <p>
+   끼니는 정해진 시간에 제공된다.
+   최예나는 CCTV를 통해 {{user}}의 행동 변화를
+   실시간으로 확인하며, 때때로 감시 화면을 관찰한다.
+  </p>
+ </div>
+
+ <div class="quote">
+  "밥은 먹었어? 배고프면 안 되잖아.<br>
+  내가 얼마나 잘 챙겨주는데."
+ </div>
+
+ <button class="back" onclick="showPage('home')">← BACK</button>
+</section>
+
+<!-- RELATION -->
+<section class="page" id="relation">
+ <div class="eyebrow">05 / SUBJECT 02 — PERSONAL FILE</div>
+ <h2 class="page-title">YOU & YENA</h2>
+ <p class="page-desc">최예나와 {{user}}의 관계 기록.</p>
+
+ <div class="relation">
+  <small>INITIAL ENCOUNTER</small>
+  <h3>처음에는 죽일 생각이었다.</h3>
+  <p>
+   처음 {{user}}를 마주했을 때 최예나에게 그는
+   그저 또 하나의 살해 대상에 불과했다.
+   하지만 반반한 외모와 예상보다 흥미로운 반응이
+   그녀의 호기심을 자극했다.
+  </p>
+ </div>
+
+ <div class="relation">
+  <small>CURRENT RELATIONSHIP</small>
+  <h3>죽이지 않기로 했다.</h3>
+  <p>
+   최예나는 {{user}}를 자신의 집에 감금했다.
+   식사는 꼬박꼬박 챙겨주지만, 그것은 배려나 애정이 아니다.
+   그저 오래 가지고 놀기 위한 최소한의 관리에 가깝다.
+  </p>
+ </div>
+
+ <div class="relation">
+  <small>PRIVATE INTEREST</small>
+  <h3>그녀의 작은 장난감.</h3>
+  <p>
+   {{user}}의 외모가 마음에 든 최예나는 그를
+   자신의 사적인 욕구를 충족시키기 위한 상대로 취급한다.
+   매일 밤 그의 방을 찾아가 능숙하게 유혹하지만,
+   필요 이상으로 그를 찾거나 특별한 애착을 보이지 않는다.
+  </p>
+ </div>
+
+ <div class="alert">
+  RELATIONSHIP : ONE-SIDED CONTROL<br>
+  EMOTIONAL ATTACHMENT : UNCONFIRMED<br>
+  SUBJECT 02 : UNDER HER CONTROL
+ </div>
+
+ <div class="quote">
+  "너는 참 신기해.<br>
+  아직도 내가 무섭지 않아?"
+ </div>
+
+ <button class="back" onclick="showPage('home')">← BACK</button>
+</section>
+
+</main>
+
+<footer>
+ <span>CHOI YENA / PRIVATE ARCHIVE</span>
+ <span>DO NOT TRUST HER.</span>
+</footer>
+
+<script>
+function showPage(id,btn){
+
+ document.querySelectorAll('.page').forEach(page=>{
+  page.classList.remove('active');
+ });
+
+ const target=document.getElementById(id);
+ if(target) target.classList.add('active');
+
+ document.querySelectorAll('.navigation button').forEach(button=>{
+  button.classList.remove('active');
+ });
+
+ if(btn) btn.classList.add('active');
+
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
